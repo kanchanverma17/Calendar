@@ -19,6 +19,7 @@
     int directionMultiplier;
     CGFloat commonDiff;
     NSArray *frameArr;
+    CGFloat thresholdValue;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *headerForMonth;
@@ -49,8 +50,8 @@ enum MonthType{
     [calendarData setInitials];
     self.headerForMonth.text = calendarData.monthTitle;
     [self.Calendar reloadData];
-   [self.prevMonthCal reloadData];
-    [self.nextMonth reloadData];
+    [self.rightCalendar reloadData];
+    [self.leftCal reloadData];
 }
 
 
@@ -72,11 +73,14 @@ enum MonthType{
     calendarData.currentDate = [NSDate date];
     [calendarData setInitials];
     self.Calendar.pagingEnabled = NO;
-    frameArr = [[NSArray alloc]initWithObjects:self.prevMonthCal,self.Calendar,self.nextMonth, nil];
+    frameArr = [[NSArray alloc]initWithObjects:self.leftCal,self.Calendar,self.rightCalendar, nil];
     [self.Calendar registerNib:[UINib nibWithNibName:@"calendarCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"calendarCell"];
-    [self.prevMonthCal registerNib:[UINib nibWithNibName:@"calendarCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"calendarCell"];
-    [self.nextMonth registerNib:[UINib nibWithNibName:@"calendarCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"calendarCell"];
+    [self.leftCal registerNib:[UINib nibWithNibName:@"calendarCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"calendarCell"];
+    [self.rightCalendar registerNib:[UINib nibWithNibName:@"calendarCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"calendarCell"];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    thresholdValue = self.view.frame.size.width/5;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -93,64 +97,20 @@ enum MonthType{
     int prevFocus = inFocus;
     int prevDirect = directionMultiplier;
     NSLog(@"scrollViewWillBeginDecelerating prev stats :: %d %d",prevFocus,prevDirect);
-   
-    if(scrollView.contentOffset.x < 0)
+    if(fabs(scrollView.contentOffset.x)>thresholdValue)
     {
-        directionMultiplier = -1;
-//        if(inFocus>0)
-//        {
-//        --inFocus;
-//        }
+        NSLog(@"make a move");
+        if(scrollView.contentOffset.x > 0)
+        {
+            //go to next month
+        }
+        else
+        {
+            // go to previous month
+        }
         
-         [self updateCalendar:-1];
     }
-    else
-    {
-        directionMultiplier = 1;
-        //++inFocus;
-        [self updateCalendar:1];
-    }
-    
-        [UIView animateWithDuration:0.5 animations:^{
-    // self.presentMonthLeading.constant = -self.Calendar.contentOffset.x;
-    // self.presentMOnthTrail.constant = -self.Calendar.contentOffset.x;
-            NSLog(@"infocus value :: %i",inFocus);
-              NSLog(@"directionMultiplier value :: %i",directionMultiplier);
-           switch (inFocus) {
-                case presentMonth:
-                   self.prevMonthCal.hidden = inFocus;
-                    self.presentMonthLeading.constant = -self.view.frame.size.width*directionMultiplier;
-                    self.prevMonthLeading.constant = 0;
-                //   self.nextMonth.hidden = 1-inFocus;
-                //   self.nextMonthLeading.constant = self.view.frame.size.width*directionMultiplier;
-                    inFocus = previousMonth;
-                   break;
-                
-                case previousMonth:
-                    self.prevMonthLeading.constant = -self.view.frame.size.width*directionMultiplier;
-                   self.Calendar.hidden = inFocus;
-                    self.presentMonthLeading.constant = self.view.frame.size.width*directionMultiplier;
-                    self.nextMonthLeading.constant = 0;
-                   self.nextMonth.hidden = inFocus+1;
-                    inFocus = nextMonth;
-                    break;
-                   
-                case nextMonth:
-                   self.Calendar.hidden = inFocus-1;
-                   self.prevMonthCal.hidden = inFocus;
-                    self.prevMonthLeading.constant = self.view.frame.size.width*directionMultiplier;
-                    self.presentMonthLeading.constant = 0;
-                    self.nextMonthLeading.constant = -self.view.frame.size.width*directionMultiplier;
-                    inFocus = presentMonth;
-                   
-                    break;
-                default:
-                    break;
-            }
-            
-            [self.view layoutIfNeeded];
-        }];
-   
+ 
     
 }
 

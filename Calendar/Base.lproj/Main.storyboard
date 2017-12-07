@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -158,11 +157,11 @@
                     <connections>
                         <outlet property="Calendar" destination="JxI-AW-0L5" id="y4l-GQ-ajw"/>
                         <outlet property="headerForMonth" destination="5Di-ad-9tI" id="NnR-83-iHx"/>
-                        <outlet property="nextMonth" destination="voo-x3-3lw" id="vtd-fz-PSQ"/>
+                        <outlet property="leftCal" destination="xDB-cx-aQQ" id="uRY-Ys-gxL"/>
                         <outlet property="nextMonthLeading" destination="wyt-Ic-MZE" id="c7z-ho-6Hi"/>
                         <outlet property="presentMonthLeading" destination="fyt-BB-Jp7" id="cTj-Yf-nPv"/>
-                        <outlet property="prevMonthCal" destination="xDB-cx-aQQ" id="CT0-T5-ZOd"/>
                         <outlet property="prevMonthLeading" destination="lu2-aA-rnw" id="wfJ-h7-wCj"/>
+                        <outlet property="rightCalendar" destination="voo-x3-3lw" id="FsG-Rl-AHs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
