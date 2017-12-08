@@ -15,11 +15,12 @@
     dataForCalendar *calendarData;
     NSString *lastDate;
     NSDateComponents *dateCompo;
-    int inFocus;
-    int directionMultiplier;
-    CGFloat commonDiff;
+  CGFloat commonDiff;
     NSArray *frameArr;
     CGFloat thresholdValue;
+    CGRect frame1;
+    CGRect frame2;
+    CGRect frame3;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *headerForMonth;
@@ -38,14 +39,12 @@ enum MonthType{
 - (IBAction)nextMonthAct:(id)sender
 {
     [self updateCalendar:1];
-   // calendarData = [NSDate dateWithTimeInterval: sinceDate:[NSDate date]];
+   
 }
 
 -(void)updateCalendar:(NSInteger)monthsDays
 {
-    //dateCompo = [[NSDateComponents alloc]init];
-   // dateCompo.day = monthsDays;
- //   calendarData.currentDate = [[NSCalendar currentCalendar]dateByAddingComponents:dateCompo toDate:calendarData.currentDate options:0];
+  
     calendarData.currentDate = [[NSCalendar currentCalendar]dateByAddingUnit:NSCalendarUnitMonth value:monthsDays toDate:calendarData.currentDate options:0];
     [calendarData setInitials];
     self.headerForMonth.text = calendarData.monthTitle;
@@ -66,20 +65,23 @@ enum MonthType{
     [super viewDidLoad];
     calHt = self.Calendar.frame.size.height;
     calWt = self.Calendar.frame.size.width;
-    // directionMultiplier = -1;
-    inFocus = presentMonth;
+
     commonDiff = self.view.frame.size.width;
     calendarData = [dataForCalendar shareddataForCalendar];
     calendarData.currentDate = [NSDate date];
     [calendarData setInitials];
     self.Calendar.pagingEnabled = NO;
-    frameArr = [[NSArray alloc]initWithObjects:self.leftCal,self.Calendar,self.rightCalendar, nil];
+    frame1 = self.leftCal.frame;
+    frame2 = self.Calendar.frame;
+    frame3 = self.rightCalendar.frame;
+    frameArr = [[NSArray alloc]initWithObjects:[NSNumber numberWithFloat:frame1.origin.x],[NSNumber numberWithFloat:frame2.origin.x],[NSNumber numberWithFloat:frame3.origin.x], nil];
     [self.Calendar registerNib:[UINib nibWithNibName:@"calendarCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"calendarCell"];
     [self.leftCal registerNib:[UINib nibWithNibName:@"calendarCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"calendarCell"];
     [self.rightCalendar registerNib:[UINib nibWithNibName:@"calendarCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"calendarCell"];
     // Do any additional setup after loading the view, typically from a nib.
     
     thresholdValue = self.view.frame.size.width/5;
+    
     
 }
 
@@ -92,28 +94,94 @@ enum MonthType{
 
 -(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
-     NSLog(@"cell decelarating at scrollViewWillBeginDecelerating ---> %f %ld ",scrollView.contentOffset.x,scrollView.tag);
+     //NSLog(@"cell decelarating at scrollViewWillBeginDecelerating ---> %f %ld ",scrollView.contentOffset.x,scrollView.tag);
     // if negative prev month
-    int prevFocus = inFocus;
-    int prevDirect = directionMultiplier;
-    NSLog(@"scrollViewWillBeginDecelerating prev stats :: %d %d",prevFocus,prevDirect);
-    if(fabs(scrollView.contentOffset.x)>thresholdValue)
-    {
-        NSLog(@"make a move");
+
+   
+//   if(fabs(scrollView.contentOffset.x)>thresholdValue)
+//   {
+       // NSLog(@"make a move");
         if(scrollView.contentOffset.x > 0)
         {
-            //go to next month
+            //go to next month i.e. scrolls into left direction
+            for( UIView *cal in self.view.subviews )
+            {
+                if([cal isKindOfClass:[UICollectionView class]])
+                {
+                    
+                CGRect tempFrame = cal.frame;
+                int i = (int)[frameArr indexOfObject:[NSNumber numberWithFloat:tempFrame.origin.x]];
+                @try {
+                    --i;
+                    [UIView animateWithDuration:2.0 animations:^{
+                         cal.frame = CGRectMake([[frameArr objectAtIndex:i] floatValue], tempFrame.origin.y, tempFrame.size.width, tempFrame.size.height);
+                    }];
+                } @catch (NSException *exception) {
+                    cal.hidden = YES;
+                         cal.frame = CGRectMake([[frameArr objectAtIndex:2] floatValue], tempFrame.origin.y, tempFrame.size.width, tempFrame.size.height);
+                        cal.hidden = NO;
+                        [self updateCalendar:1];
+                  
+                }
+                    
+                }
+                
+            }
+          
         }
         else
         {
-            // go to previous month
+            // go to previous month i.e. scrolls into right direction
+         for( UIView *cal in self.view.subviews )
+            {
+                if([cal isKindOfClass:[UICollectionView class]])
+                {
+                    
+                    CGRect tempFrame = cal.frame;
+                    int i = (int)[frameArr indexOfObject:[NSNumber numberWithFloat:tempFrame.origin.x]];
+                    @try {
+                        ++i;
+                        [UIView animateWithDuration:0.3 animations:^{
+                            cal.frame = CGRectMake([[frameArr objectAtIndex:i] floatValue], tempFrame.origin.y, tempFrame.size.width, tempFrame.size.height);
+                        }];
+                        
+                        
+                    } @catch (NSException *exception) {
+                        cal.hidden = YES;
+                            cal.hidden = NO;
+                            [self updateCalendar:-1];
+                        
+                    }
+                    
+                }
+                
+            }
         }
         
-    }
+   // }
  
     
 }
 
+-(CGRect)frameforviewwithtag:(int)tagVal
+{
+    CGRect result;
+    switch (tagVal)
+    {
+        case -3:
+            result = frame1;
+            break;
+        case -2:
+            result = frame2;
+            break;
+        case -1:
+            result = frame3;
+            break;
+           
+ 
+    }
+    return result;
+}
 
                                                                                                                                                                                                                                                                                                                                                         
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
