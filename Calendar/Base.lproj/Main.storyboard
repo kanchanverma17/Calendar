@@ -61,7 +61,7 @@
                                     <constraint firstItem="5Di-ad-9tI" firstAttribute="width" secondItem="VjK-i4-RGE" secondAttribute="width" multiplier="0.6" id="tHl-dl-sg3"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="-1" contentMode="scaleToFill" alwaysBounceHorizontal="YES" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="voo-x3-3lw">
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" tag="-1" contentMode="scaleToFill" alwaysBounceHorizontal="YES" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="voo-x3-3lw">
                                 <rect key="frame" x="375" y="82" width="375" height="400"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fot-2E-jfo">
@@ -85,7 +85,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="6x9-8j-RvS"/>
                                 </connections>
                             </collectionView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="-3" contentMode="scaleToFill" alwaysBounceHorizontal="YES" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xDB-cx-aQQ">
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" tag="-3" contentMode="scaleToFill" alwaysBounceHorizontal="YES" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xDB-cx-aQQ">
                                 <rect key="frame" x="-375" y="82" width="375" height="400"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="pmV-L6-f2O">
