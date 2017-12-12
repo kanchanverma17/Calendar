@@ -13,13 +13,6 @@
 
 @interface ViewController : UIViewController <UICollectionViewDelegate,UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *Calendar;
-@property (weak, nonatomic) IBOutlet UICollectionView *leftCal;
-@property (weak, nonatomic) IBOutlet UICollectionView *rightCalendar;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *presentMonthLeading;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *prevMonthLeading;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nextMonthLeading;
 
 @end
 
