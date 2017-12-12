@@ -16,11 +16,9 @@
     NSString *lastDate;
     NSDateComponents *dateCompo;
   CGFloat commonDiff;
-    NSArray *frameArr;
+
     CGFloat thresholdValue;
-    CGRect frame1;
-    CGRect frame2;
-    CGRect frame3;
+  
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *headerForMonth;
@@ -49,8 +47,7 @@ enum MonthType{
     [calendarData setInitials];
     self.headerForMonth.text = calendarData.monthTitle;
     [self.Calendar reloadData];
-    [self.rightCalendar reloadData];
-    [self.leftCal reloadData];
+
 }
 
 
@@ -71,13 +68,9 @@ enum MonthType{
     calendarData.currentDate = [NSDate date];
     [calendarData setInitials];
     self.Calendar.pagingEnabled = NO;
-    frame1 = self.leftCal.frame;
-    frame2 = self.Calendar.frame;
-    frame3 = self.rightCalendar.frame;
-    frameArr = [[NSArray alloc]initWithObjects:[NSNumber numberWithFloat:frame1.origin.x],[NSNumber numberWithFloat:frame2.origin.x],[NSNumber numberWithFloat:frame3.origin.x], nil];
+   
     [self.Calendar registerNib:[UINib nibWithNibName:@"calendarCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"calendarCell"];
-    [self.leftCal registerNib:[UINib nibWithNibName:@"calendarCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"calendarCell"];
-    [self.rightCalendar registerNib:[UINib nibWithNibName:@"calendarCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"calendarCell"];
+   
     // Do any additional setup after loading the view, typically from a nib.
     
     thresholdValue = self.view.frame.size.width/5;
