@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -61,54 +62,6 @@
                                     <constraint firstItem="5Di-ad-9tI" firstAttribute="width" secondItem="VjK-i4-RGE" secondAttribute="width" multiplier="0.6" id="tHl-dl-sg3"/>
                                 </constraints>
                             </view>
-                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" tag="-1" contentMode="scaleToFill" alwaysBounceHorizontal="YES" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="voo-x3-3lw">
-                                <rect key="frame" x="375" y="82" width="375" height="400"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fot-2E-jfo">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="calendarCell" id="ZAJ-Tr-W06">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="3nw-ki-hOx"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="6x9-8j-RvS"/>
-                                </connections>
-                            </collectionView>
-                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" tag="-3" contentMode="scaleToFill" alwaysBounceHorizontal="YES" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xDB-cx-aQQ">
-                                <rect key="frame" x="-375" y="82" width="375" height="400"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="pmV-L6-f2O">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="calendarCell" id="hJv-Td-F6e">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="mHz-2Z-xlP"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="EaZ-uh-SL9"/>
-                                </connections>
-                            </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="-2" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JxI-AW-0L5">
                                 <rect key="frame" x="0.0" y="82" width="375" height="400"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -136,32 +89,20 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="voo-x3-3lw" firstAttribute="width" secondItem="JxI-AW-0L5" secondAttribute="width" id="0kf-iO-DmW"/>
                             <constraint firstItem="VjK-i4-RGE" firstAttribute="top" secondItem="MW3-xQ-PbS" secondAttribute="bottom" constant="20" id="6yV-hA-AqS"/>
-                            <constraint firstItem="xDB-cx-aQQ" firstAttribute="height" secondItem="JxI-AW-0L5" secondAttribute="height" id="7qi-LO-e8h"/>
                             <constraint firstItem="JxI-AW-0L5" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.6" id="A49-2F-ubA"/>
                             <constraint firstItem="VjK-i4-RGE" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="MXi-4N-aIk"/>
                             <constraint firstItem="JxI-AW-0L5" firstAttribute="width" secondItem="VjK-i4-RGE" secondAttribute="width" id="Q2a-Az-4Ai"/>
-                            <constraint firstItem="voo-x3-3lw" firstAttribute="height" secondItem="JxI-AW-0L5" secondAttribute="height" id="QZ9-xL-9so"/>
-                            <constraint firstItem="xDB-cx-aQQ" firstAttribute="top" secondItem="JxI-AW-0L5" secondAttribute="top" id="RB7-1b-V4x"/>
                             <constraint firstItem="VjK-i4-RGE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WLv-zN-Lez"/>
                             <constraint firstItem="JxI-AW-0L5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fyt-BB-Jp7"/>
-                            <constraint firstItem="xDB-cx-aQQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-375" id="lu2-aA-rnw"/>
-                            <constraint firstItem="xDB-cx-aQQ" firstAttribute="width" secondItem="JxI-AW-0L5" secondAttribute="width" id="p4d-0v-mfu"/>
                             <constraint firstItem="JxI-AW-0L5" firstAttribute="top" secondItem="VjK-i4-RGE" secondAttribute="bottom" constant="4" id="t5J-E4-h94"/>
-                            <constraint firstItem="voo-x3-3lw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="375" id="wyt-Ic-MZE"/>
-                            <constraint firstItem="voo-x3-3lw" firstAttribute="top" secondItem="JxI-AW-0L5" secondAttribute="top" id="ybe-Sl-R7s"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fC6-q7-uKQ"/>
                     <connections>
                         <outlet property="Calendar" destination="JxI-AW-0L5" id="y4l-GQ-ajw"/>
                         <outlet property="headerForMonth" destination="5Di-ad-9tI" id="NnR-83-iHx"/>
-                        <outlet property="leftCal" destination="xDB-cx-aQQ" id="uRY-Ys-gxL"/>
-                        <outlet property="nextMonthLeading" destination="wyt-Ic-MZE" id="c7z-ho-6Hi"/>
                         <outlet property="presentMonthLeading" destination="fyt-BB-Jp7" id="cTj-Yf-nPv"/>
-                        <outlet property="prevMonthLeading" destination="lu2-aA-rnw" id="wfJ-h7-wCj"/>
-                        <outlet property="rightCalendar" destination="voo-x3-3lw" id="FsG-Rl-AHs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
