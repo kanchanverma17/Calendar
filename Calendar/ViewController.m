@@ -94,94 +94,50 @@ enum MonthType{
 
 -(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
-     //NSLog(@"cell decelarating at scrollViewWillBeginDecelerating ---> %f %ld ",scrollView.contentOffset.x,scrollView.tag);
-    // if negative prev month
+    UIView *cal = scrollView;
+    NSLog(@"scrollView.contentOffset.x value ---- %f",scrollView.contentOffset.x);
+        if(scrollView.contentOffset.x != 0)
+        {
+              CGRect tempFrame = cal.frame;
 
-   
-//   if(fabs(scrollView.contentOffset.x)>thresholdValue)
-//   {
-       // NSLog(@"make a move");
-        if(scrollView.contentOffset.x > 0)
-        {
-            //go to next month i.e. scrolls into left direction
-            for( UIView *cal in self.view.subviews )
+                    CGFloat offsetValue  = scrollView.contentOffset.x;
+
+            if(scrollView.contentOffset.x>0)
             {
-                if([cal isKindOfClass:[UICollectionView class]])
-                {
-                    
-                CGRect tempFrame = cal.frame;
-                int i = (int)[frameArr indexOfObject:[NSNumber numberWithFloat:tempFrame.origin.x]];
-                @try {
-                    --i;
-                    [UIView animateWithDuration:2.0 animations:^{
-                         cal.frame = CGRectMake([[frameArr objectAtIndex:i] floatValue], tempFrame.origin.y, tempFrame.size.width, tempFrame.size.height);
-                    }];
-                } @catch (NSException *exception) {
-                    cal.hidden = YES;
-                         cal.frame = CGRectMake([[frameArr objectAtIndex:2] floatValue], tempFrame.origin.y, tempFrame.size.width, tempFrame.size.height);
-                        cal.hidden = NO;
-                        [self updateCalendar:1];
-                  
-                }
-                    
-                }
-                
+                 tempFrame = CGRectMake(cal.frame.size.width - offsetValue, tempFrame.origin.y, tempFrame.size.width, tempFrame.size.height);
             }
-          
-        }
-        else
-        {
-            // go to previous month i.e. scrolls into right direction
-         for( UIView *cal in self.view.subviews )
+            else
             {
-                if([cal isKindOfClass:[UICollectionView class]])
-                {
-                    
-                    CGRect tempFrame = cal.frame;
-                    int i = (int)[frameArr indexOfObject:[NSNumber numberWithFloat:tempFrame.origin.x]];
-                    @try {
-                        ++i;
-                        [UIView animateWithDuration:0.3 animations:^{
-                            cal.frame = CGRectMake([[frameArr objectAtIndex:i] floatValue], tempFrame.origin.y, tempFrame.size.width, tempFrame.size.height);
+                  tempFrame = CGRectMake(-(cal.frame.size.width+offsetValue), tempFrame.origin.y, tempFrame.size.width, tempFrame.size.height);
+            }
+            
+     
+                    [UIView animateWithDuration:0.2 animations:^{
+                        cal.hidden = YES;
+                        [cal setFrame:tempFrame];
+                    } completion:^(BOOL finished) {
+                          cal.hidden = NO;
+                        [UIView animateWithDuration:1.0 animations:^{
+                          
+                            cal.frame = CGRectMake(0, tempFrame.origin.y, tempFrame.size.width, tempFrame.size.height);
+                            if(tempFrame.origin.x>0)
+                            {
+                            [self updateCalendar:1];
+                            }
+                            else
+                            {
+                                [self updateCalendar:-1];
+                            }
                         }];
                         
-                        
-                    } @catch (NSException *exception) {
-                        cal.hidden = YES;
-                            cal.hidden = NO;
-                            [self updateCalendar:-1];
-                        
-                    }
-                    
-                }
-                
-            }
+                    }];
+   
+          
         }
-        
-   // }
- 
+
     
 }
 
--(CGRect)frameforviewwithtag:(int)tagVal
-{
-    CGRect result;
-    switch (tagVal)
-    {
-        case -3:
-            result = frame1;
-            break;
-        case -2:
-            result = frame2;
-            break;
-        case -1:
-            result = frame3;
-            break;
-           
- 
-    }
-    return result;
-}
 
                                                                                                                                                                                                                                                                                                                                                         
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -213,18 +169,7 @@ enum MonthType{
     {
         cell = (calendarCell *)[UICollectionViewCell init];
     }
-    if(collectionView == self.Calendar)
-    {
-       // cell.backgroundColor = [UIColor greenColor];
-    }
-    if(collectionView == self.Calendar)
-    {
-         //  cell.backgroundColor = [UIColor grayColor];
-    }
-    if(collectionView == self.Calendar)
-    {
-         //  cell.backgroundColor = [UIColor cyanColor];
-    }
+   
     cell.Lbldate.text =[calendarData valueForCellAtIndex:(int)indexPath.row];
     
     if(![cell.Lbldate.text isEqualToString:@""])
