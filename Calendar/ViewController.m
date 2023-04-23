@@ -150,26 +150,24 @@ enum MonthType{
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-   // NSLog(@" collectionView numberOfItemsInSection %ld:: ",(long)collectionView.tag);
     return 49;
 }
 
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    calendarCell *cell = (calendarCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"calendarCell" forIndexPath:indexPath];
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if(!cell)
-    {
+    calendarCell *cell = (calendarCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"calendarCell" forIndexPath:indexPath];
+    if(!cell) {
         cell = (calendarCell *)[UICollectionViewCell init];
     }
-   
-    cell.Lbldate.text =[calendarData valueForCellAtIndex:(int)indexPath.row];
-    
-    if(![cell.Lbldate.text isEqualToString:@""])
-    {
+    cell.Lbldate.text = [calendarData valueForCellAtIndex:(int)indexPath.row];
+    if(![cell.Lbldate.text isEqualToString:@""]) {
         lastDate = cell.Lbldate.text;
     }
-    
+    if(indexPath.row%7 > 4 ) {
+        cell.Lbldate.textColor = [UIColor magentaColor];
+    } else {
+        cell.Lbldate.textColor = [UIColor blackColor];
+    }
     return cell;
 }
 - (void)didReceiveMemoryWarning {

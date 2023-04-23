@@ -8,8 +8,7 @@
 
 #import "dataForCalendar.h"
 
-@implementation dataForCalendar
-{
+@implementation dataForCalendar {
     NSArray *weekArr ;
     NSString *firstDay;
     NSDateFormatter *format;
@@ -24,12 +23,9 @@ static dataForCalendar *sharedData;
 
 +(dataForCalendar*)shareddataForCalendar
 {
-    @synchronized([dataForCalendar class])
-    {
-    
-        if(!sharedData){
+    @synchronized([dataForCalendar class]) {
+        if(!sharedData) {
             sharedData = [[dataForCalendar alloc]init];
-            
         }
         
     }
@@ -48,11 +44,9 @@ static dataForCalendar *sharedData;
     [format setDateFormat:@"dd"];
     
     NSString *tempStr = [format stringFromDate:currentDt];
-    //NSLog(@"present date :::: %@",currentDt);
     int dayLapsed = [tempStr intValue] - 1;
     NSDate *startDate = [NSDate dateWithTimeInterval:-dayLapsed*24*60*60 sinceDate:currentDt];
     [format setDateFormat:@"E"];
-    // NSLog(@"present date :::: %@",[format stringFromDate:startDate]);
     monthStartInd = (int)[weekArr indexOfObject:[format stringFromDate:startDate]];
     monthStartInd = 6+monthStartInd;
     [format setDateFormat:@"MMMM yyyy"];
@@ -62,25 +56,20 @@ static dataForCalendar *sharedData;
 }
 
 -(NSString *)valueForCellAtIndex:(int)indexValue{
-   // NSLog(@"index passed is :::: %d",indexValue);
     NSString *resultValue = @"";
     int rowVal = indexValue/7;
     int colVal = indexValue % 7;
-    if(rowVal)
-    {
+    if(rowVal) {
         int tempDay = indexValue-monthStartInd;
         if(tempDay>0 && tempDay<= currentMonthDays){
             resultValue = [NSString stringWithFormat:@"%d",tempDay];
         }else{
             resultValue = @"";
         }
-    }
-    else
-    {
+    } else {
             resultValue = [weekArr objectAtIndex:colVal];
     }
   
-   //  NSLog(@"resultValue passed is :::: %@",resultValue);
     return resultValue;
 }
 
